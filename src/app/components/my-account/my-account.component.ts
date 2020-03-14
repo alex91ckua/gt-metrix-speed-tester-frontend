@@ -14,11 +14,14 @@ export class MyAccountComponent implements OnInit {
     api_refill: null
   };
 
+  loaded = false;
+
   constructor(private gtMetrixService: GtMetrixService) { }
 
   ngOnInit() {
     this.gtMetrixService.getAccountStatus().subscribe((data) => {
       this.accountStatusData = data;
+      this.loaded = true;
     })
   }
 

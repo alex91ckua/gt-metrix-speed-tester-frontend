@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from './../../../environments/environment';
 import { AccountStatus } from '../models/account-status.type';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,9 +9,19 @@ import { Observable } from 'rxjs';
 })
 export class GtMetrixService {
 
-  constructor(private httpClient: HttpClient) { }
+  httpOptions: {
+    headers: HttpHeaders
+  };
+
+  constructor(private httpClient: HttpClient) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+  }
 
   getAccountStatus(): Observable<AccountStatus> {
-    return this.httpClient.get<AccountStatus>(`${environment.apiEndpoint}/status`);
+    return this.httpClient.get<AccountStatus>(`${environment.apiEndpoint}/accounts/status`, this.httpOptions);
   }
 }
