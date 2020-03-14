@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'https://gtmetrix.com/api/0.1'
+  apiEndpoint: 'http://localhost:3000',
 };
 
 /*
