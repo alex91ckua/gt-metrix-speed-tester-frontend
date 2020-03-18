@@ -1,0 +1,47 @@
+<div class="row" >
+  <div class="col-8" >
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+      </div>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" (change)="onFileChange($event)" accept="text/csv,text/plain">
+        <label class="custom-file-label" for="inputGroupFile01">{{ fileName ? fileName : 'Choose file' }}</label>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <button type="button" [disabled]="!parsedCsvFile || !parsedCsvFile.data" (click)="onStartClicked()" class="btn btn-primary">Start!</button>
+  </div>
+</div>
+
+<ng-container *ngIf="parsedCsvFile && parsedCsvFile.errors.length > 0">
+  <alert type="warning" *ngFor="let error of parsedCsvFile.errors" >
+    <strong>Warning!</strong> {{ error.message }}
+  </alert>
+</ng-container>
+
+<table class="table" *ngIf="parsedCsvFile && parsedCsvFile.data" >
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">URL</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of parsedCsvFile.data; index as i">
+      <th scope="row">{{ i }}</th>
+      <td>{{ item }}</td>
+      <td>
+        <ng-container *ngIf="item.status; else elseBlock" >
+          <span class="badge badge-secondary">{{ item.status }}</span>
+        </ng-container>
+
+        <ng-template #elseBlock>
+          <span class="badge badge-primary">ready to start</span>
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>
