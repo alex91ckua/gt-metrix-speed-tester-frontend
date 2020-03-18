@@ -15,7 +15,7 @@
     <tr *ngFor="let test of tests; index as i" >
       <th scope="row">{{ i }}</th>
       <td>
-        <a href="#">{{ test.test_id }}</a>
+        <a routerLink="/test/{{ test.id }}">{{ test.test_id }}</a>
       </td>
       <td>
         <ng-container [ngSwitch]="test.state">

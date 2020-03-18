@@ -1,0 +1,39 @@
+<div class="spinner-grow" role="status" *ngIf="!loaded">
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div *ngIf="loaded">
+
+  <ng-container *ngIf="test.results" >
+      <div class="row" >
+        <div class="col-6" >
+          <!-- <progressbar class="progress-striped active" [value]="55" [type]="'success'">{{type}}</progressbar> -->
+        </div>
+      </div>
+  </ng-container>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      Created At: {{ test.created_at | date : 'medium' }}
+    </li>
+    <li class="list-group-item">
+      Updated At: {{ test.updated_at | date : 'medium' }}
+    </li>    
+    <li class="list-group-item">
+      GTM ID: <var>{{ test.test_id }}</var>
+    </li>
+    <li class="list-group-item">
+      State: 
+      <ng-container [ngSwitch]="test.state">
+        <span *ngSwitchCase="'queued'" class="badge badge-secondary">{{ test.state }}</span>
+        <span *ngSwitchCase="'started'" class="badge badge-warning">{{ test.state }}</span>
+        <span *ngSwitchCase="'completed'" class="badge badge-success">{{ test.state }}</span>
+        <span *ngSwitchCase="'error'" class="badge badge-danger">{{ test.state }}</span>
+        <span *ngSwitchDefault class="badge badge-primary">{{ test.state }}</span>
+      </ng-container>
+    </li>
+    <li class="list-group-item" *ngIf="test.error" >
+      Error: {{ test.error }}
+    </li>
+  </ul>
+</div>

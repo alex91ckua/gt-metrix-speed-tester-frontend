@@ -30,4 +30,8 @@ export class GtMetrixService {
     return this.httpClient.get<Test[]>(`${environment.apiEndpoint}/tests`, this.httpOptions);
   }
 
+  getTest(id: number): Observable<Test> {
+    return this.httpClient.get<Test>(`${environment.apiEndpoint}/tests/${id}`, this.httpOptions);
+  }
+
 }
