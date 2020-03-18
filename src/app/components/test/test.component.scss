@@ -1,0 +1,23 @@
+.current {
+  position: absolute;
+  color: #848484;
+  font-weight: 100;
+  line-height: 1;
+}
+
+round-progress {
+  margin: auto;
+}
+
+.progress-wrapper {
+  position: relative;
+}
+
+.score {
+
+  &__title {
+    font-size: 95%;
+    padding-bottom: 20px;
+    text-align: center;
+  }
+}
