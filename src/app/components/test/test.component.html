@@ -1,0 +1,72 @@
+<div class="spinner-grow" role="status" *ngIf="!loaded">
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div *ngIf="loaded">
+
+  <ng-container *ngIf="test.results" >
+    <div class="row" >
+      <div class="col-3 offset-md-3 score" >
+        <h4 class="score__title" >PageSpeed score</h4>
+        <div class="progress-wrapper">
+          <div class="current" [ngStyle]="getOverlayStyle()">{{ test.results.pagespeed_score }}/{{ maxScorePoint }}</div>
+          <round-progress
+            [current]="test.results.pagespeed_score"
+            [max]="maxScorePoint"
+            [color]="pageSpeedColor"
+            [background]="'#eaeaea'"
+            [radius]="radius"
+            [stroke]="10"
+            [rounded]="true"
+            [semicircle]="semicircle">
+          </round-progress>
+        </div>
+      </div>
+
+      <div class="col-3 score" >
+        <h4 class="score__title" >YSlow score</h4>
+        <div>
+          <div class="progress-wrapper">
+            <div class="current" [ngStyle]="getOverlayStyle()">{{ test.results.yslow_score }}/{{ maxScorePoint }}</div>
+            <round-progress
+              [current]="test.results.yslow_score"
+              [max]="maxScorePoint"
+              [color]="yslowSpeedColor"
+              [background]="'#eaeaea'"
+              [radius]="radius"
+              [stroke]="10"
+              [rounded]="true"
+              [semicircle]="semicircle">
+            </round-progress>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      Created At: {{ test.created_at | date : 'medium' }}
+    </li>
+    <li class="list-group-item">
+      Updated At: {{ test.updated_at | date : 'medium' }}
+    </li>    
+    <li class="list-group-item">
+      GTM ID: <var>{{ test.test_id }}</var>
+    </li>
+    <li class="list-group-item">
+      State: 
+      <ng-container [ngSwitch]="test.state">
+        <span *ngSwitchCase="'queued'" class="badge badge-secondary">{{ test.state }}</span>
+        <span *ngSwitchCase="'started'" class="badge badge-warning">{{ test.state }}</span>
+        <span *ngSwitchCase="'completed'" class="badge badge-success">{{ test.state }}</span>
+        <span *ngSwitchCase="'error'" class="badge badge-danger">{{ test.state }}</span>
+        <span *ngSwitchDefault class="badge badge-primary">{{ test.state }}</span>
+      </ng-container>
+    </li>
+    <li class="list-group-item" *ngIf="test.error" >
+      Error: {{ test.error }}
+    </li>
+  </ul>
+</div>

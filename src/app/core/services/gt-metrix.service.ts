@@ -3,6 +3,7 @@ import { environment } from './../../../environments/environment';
 import { AccountStatus } from '../models/account-status.type';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Test } from '../models/test.type';
 
 @Injectable({
   providedIn: 'root'
@@ -24,4 +25,13 @@ export class GtMetrixService {
   getAccountStatus(): Observable<AccountStatus> {
     return this.httpClient.get<AccountStatus>(`${environment.apiEndpoint}/accounts/status`, this.httpOptions);
   }
+
+  getTests(): Observable<Test[]> {
+    return this.httpClient.get<Test[]>(`${environment.apiEndpoint}/tests`, this.httpOptions);
+  }
+
+  getTest(id: number): Observable<Test> {
+    return this.httpClient.get<Test>(`${environment.apiEndpoint}/tests/${id}`, this.httpOptions);
+  }
+
 }
