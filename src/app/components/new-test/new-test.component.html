@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="col-4">
-    <button type="button" [disabled]="!parsedCsvFile || !parsedCsvFile.data" (click)="onStartClicked()" class="btn btn-primary">Start!</button>
+    <button type="button" [disabled]="!parsedCsvFile || !parsedCsvFile.data || error" (click)="onStartClicked()" class="btn btn-primary">Start!</button>
   </div>
 </div>
 
@@ -21,7 +21,13 @@
   </alert>
 </ng-container>
 
-<table class="table" *ngIf="parsedCsvFile && parsedCsvFile.data" >
+<ng-container *ngIf="error">
+  <alert type="danger">
+    <strong>Error!</strong> {{ error }}
+  </alert>
+</ng-container>
+
+<table class="table" *ngIf="parsedCsvFile && parsedCsvFile.data && error == null" >
   <thead>
     <tr>
       <th scope="col">#</th>
