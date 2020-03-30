@@ -11,15 +11,9 @@
     </div>
   </div>
   <div class="col-4">
-    <button type="button" [disabled]="!parsedCsvFile || !parsedCsvFile.data || error" (click)="onStartClicked()" class="btn btn-primary">Start!</button>
+    <button type="button" [disabled]="!data || error || startDisabled" (click)="onStartClicked($event)" class="btn btn-primary">Start!</button>
   </div>
 </div>
-
-<ng-container *ngIf="parsedCsvFile && parsedCsvFile.errors.length > 0">
-  <alert type="warning" *ngFor="let error of parsedCsvFile.errors" >
-    <strong>Warning!</strong> {{ error.message }}
-  </alert>
-</ng-container>
 
 <ng-container *ngIf="error">
   <alert type="danger">
@@ -27,7 +21,7 @@
   </alert>
 </ng-container>
 
-<table class="table" *ngIf="parsedCsvFile && parsedCsvFile.data && error == null" >
+<table class="table" *ngIf="data && error == null" >
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -36,17 +30,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of parsedCsvFile.data; index as i">
+    <tr *ngFor="let item of data; index as i">
       <th scope="row">{{ i }}</th>
-      <td>{{ item }}</td>
+      <td>{{ item.url }}</td>
       <td>
-        <ng-container *ngIf="item.status; else elseBlock" >
-          <span class="badge badge-secondary">{{ item.status }}</span>
+        <ng-container [ngSwitch]="item.state">
+          <span *ngSwitchCase="'queued'" class="badge badge-secondary">{{ item.state }}</span>
+          <span *ngSwitchCase="'started'" class="badge badge-warning">{{ item.state }}</span>
+          <span *ngSwitchCase="'completed'" class="badge badge-success">{{ item.state }}</span>
+          <span *ngSwitchCase="'error'" tooltip="{{ item.errorMsg }}" class="badge badge-danger">{{ item.state }}</span>
+          <span *ngSwitchDefault class="badge badge-primary">{{ item.state }}</span>
         </ng-container>
-
-        <ng-template #elseBlock>
-          <span class="badge badge-primary">ready to start</span>
-        </ng-template>
       </td>
     </tr>
   </tbody>

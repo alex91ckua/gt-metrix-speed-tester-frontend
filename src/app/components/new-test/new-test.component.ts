@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
+import { GtMetrixService } from 'src/app/core/services/gt-metrix.service';
 
 @Component({
   selector: 'app-new-test',
@@ -9,16 +10,32 @@ import { Papa } from 'ngx-papaparse';
 export class NewTestComponent implements OnInit {
 
   formGroup;
-  parsedCsvFile = null;
+  data: null | Array<any> = null;
   fileName: null | string = null;
   error: null | string = null;
+  startDisabled: boolean = false;
 
-  constructor(private papa: Papa) { }
+  constructor(private papa: Papa, private gtMetrixService: GtMetrixService) { }
 
   ngOnInit() {
   }
 
-  onStartClicked() {
+  onStartClicked(event) {
+    this.startDisabled = true;
+    this.data.forEach(item => {
+      this.gtMetrixService.createTest(item.url).subscribe(
+        (data) => {
+          if (data.state) {
+            item.state = data.state;
+          }
+        },
+        error => {
+          console.log(error);
+          item.state = 'error';
+          item.errorMsg = error.error.error;
+        },
+      )
+    });
   }
 
   private validURL(str) {
@@ -32,14 +49,15 @@ export class NewTestComponent implements OnInit {
   }
 
   /**
-   * Check if csv file data are correct.
+   * Validate csv file data if they are correct.
    * Only urls should exist
    */
-  private isValidData(data: Array<Array<String>>): boolean{
+  private validateData(data: Array<Array<String>>): boolean {
     for (let i = 0; i < data.length; i++) {
-      let el = data[i];
+      const el = data[i];
+      const url = el[0];
       try {
-        if (this.validURL(el[0]) === false) {
+        if (this.validURL(url) === false) {
           return false;
         }
       } catch (error) {
@@ -47,6 +65,22 @@ export class NewTestComponent implements OnInit {
       }
     }
     return true;
+  }
+
+  private prettifyData(data: Array<Array<String>>) {
+    this.data = [];
+    for (let i = 0; i < data.length; i++) {
+      const el = data[i];
+      const url = el[0];
+
+      const item = {
+        url: url,
+        state: 'ready for test'
+      };
+      this.data.push(item);
+    }
+
+    console.log(this.data);
   }
 
   onFileChange(event) {
@@ -60,11 +94,13 @@ export class NewTestComponent implements OnInit {
       this.papa.parse(file, {
         complete: (results) => {
           console.log('Parsed CSV: ', results);
-          if (this.isValidData(results.data) && results.data.length > 0) {
+          if (this.validateData(results.data) && results.data.length > 0) {
+            this.startDisabled = false;
             this.error = null;
-            this.parsedCsvFile = results;
+            this.prettifyData(results.data);
           } else {
-            this.error = 'Selected CSV file format is wrong or empty.'
+            this.data = null;
+            this.error = 'Selected CSV file format is wrong or empty.';
           }
         }
       });
