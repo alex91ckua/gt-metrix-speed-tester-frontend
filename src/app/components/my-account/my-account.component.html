@@ -1,3 +1,7 @@
+<div class="spinner-grow" role="status" *ngIf="!loaded">
+  <span class="sr-only">Loading...</span>
+</div>
+
 <div *ngIf="loaded" >
   <strong>API Credits: {{ accountStatusData.api_credits }}</strong><br>
   <strong>API Refill: {{ accountStatusData.api_refill * 1000 | date: 'medium' }}</strong>
