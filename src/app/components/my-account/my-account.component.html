@@ -3,6 +3,6 @@
 </div>
 
 <div *ngIf="loaded" >
-  <strong>API Credits: {{ accountStatusData.api_credits }}</strong><br>
-  <strong>API Refill: {{ accountStatusData.api_refill * 1000 | date: 'medium' }}</strong>
+  <p>API Credits left: <strong>{{ accountStatusData.api_credits }}</strong></p><br>
+  <p>API Refill at: <strong>{{ accountStatusData.api_refill * 1000 | date: 'medium' }}</strong></p><br>
 </div>
