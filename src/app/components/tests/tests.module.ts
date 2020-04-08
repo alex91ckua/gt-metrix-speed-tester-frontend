@@ -5,6 +5,8 @@ import { TestsRoutingModule } from './tests-routing.module';
 import { TestsComponent } from './tests.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [TestsComponent],
@@ -12,7 +14,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CommonModule,
     TestsRoutingModule,
     TooltipModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    ButtonsModule.forRoot(),
+    FormsModule
   ]
 })
 export class TestsModule { }
