@@ -2,73 +2,76 @@
   <span class="sr-only">Loading...</span>
 </div>
 
-<div *ngIf="showFilters == '1'" class="mb-5" >
-  <h5 class="pb-4">Apply Filters</h5>
 
-  <form (ngSubmit)="onFiltersSubmit()" #filtersForm="ngForm">
-    <div class="form-group">
-      <label for="inputUrl">URL</label>
-      <input type="text" class="form-control" id="inputUrl" placeholder="Like google.com" [(ngModel)]="filtersModel.url" name="url">
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-3">
-        <label for="inputPageSpeedFrom">PageSpeed Score From</label>
-        <input type="number" 
+<div *ngIf="tests" >
+  <div *ngIf="showFilters == '1'" class="mb-5" >
+    <h5 class="pb-4">Apply Filters</h5>
+  
+    <form (ngSubmit)="onFiltersSubmit()" #filtersForm="ngForm">
+      <div class="form-group">
+        <label for="inputUrl">URL</label>
+        <input type="text" class="form-control" id="inputUrl" placeholder="Like google.com" [(ngModel)]="filtersModel.url" name="url">
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="inputPageSpeedFrom">PageSpeed Score From</label>
+          <input type="number" 
+                  class="form-control" 
+                  id="inputPageSpeedFrom" 
+                  placeholder="0-100" 
+                  min="0" 
+                  max="100" 
+                  [(ngModel)]="filtersModel.pagescoreFrom" 
+                  name="pagescoreFrom">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputPageSpeedTo">PageSpeed Score To</label>
+          <input type="number" 
                 class="form-control" 
-                id="inputPageSpeedFrom" 
+                id="inputPageSpeedTo" 
                 placeholder="0-100" 
                 min="0" 
                 max="100" 
-                [(ngModel)]="filtersModel.pagescoreFrom" 
-                name="pagescoreFrom">
-      </div>
-      <div class="form-group col-md-3">
-        <label for="inputPageSpeedTo">PageSpeed Score To</label>
-        <input type="number" 
-              class="form-control" 
-              id="inputPageSpeedTo" 
-              placeholder="0-100" 
-              min="0" 
-              max="100" 
-              [(ngModel)]="filtersModel.pagescoreTo" 
-              name="pagescoreTo">
-      </div>
-
-      <div class="form-group col-md-3">
-        <label for="inputYslowFrom">YSlow Score From</label>
-        <input type="number" 
+                [(ngModel)]="filtersModel.pagescoreTo" 
+                name="pagescoreTo">
+        </div>
+  
+        <div class="form-group col-md-3">
+          <label for="inputYslowFrom">YSlow Score From</label>
+          <input type="number" 
+                  class="form-control" 
+                  id="inputYslowFrom" 
+                  placeholder="0-100" 
+                  min="0" 
+                  max="100" 
+                  [(ngModel)]="filtersModel.yslowFrom" 
+                  name="yslowFrom">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputYslowTo">YSlow Score To</label>
+          <input type="number" 
                 class="form-control" 
-                id="inputYslowFrom" 
+                id="inputYslowTo" 
                 placeholder="0-100" 
                 min="0" 
                 max="100" 
-                [(ngModel)]="filtersModel.yslowFrom" 
-                name="yslowFrom">
+                [(ngModel)]="filtersModel.yslowTo" 
+                name="yslowTo">
+        </div>
       </div>
-      <div class="form-group col-md-3">
-        <label for="inputYslowTo">YSlow Score To</label>
-        <input type="number" 
-              class="form-control" 
-              id="inputYslowTo" 
-              placeholder="0-100" 
-              min="0" 
-              max="100" 
-              [(ngModel)]="filtersModel.yslowTo" 
-              name="yslowTo">
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary mr-2">Apply</button>
-    <button type="button" (click)="onClearFilters()" class="btn btn-secondary">Clear filters</button>
-  </form>
-
-</div>
-
-<div class="mb-3" >
-  <button type="button" class="btn btn-link"
-  [(ngModel)]="showFilters" btnCheckbox
-  btnCheckboxTrue="1" btnCheckboxFalse="0">{{ showFilters == '0' ? 'Show Filters' : 'Hide Filters' }} <fa-icon [icon]="faFilter"></fa-icon></button>
+  
+      <button type="submit" class="btn btn-primary mr-2">Apply</button>
+      <button type="button" (click)="onClearFilters()" class="btn btn-secondary">Clear filters</button>
+    </form>
+  
+  </div>
+  
+  <div class="mb-3" >
+    <button type="button" class="btn btn-link"
+    [(ngModel)]="showFilters" btnCheckbox
+    btnCheckboxTrue="1" btnCheckboxFalse="0">{{ showFilters == '0' ? 'Show Filters' : 'Hide Filters' }} <fa-icon [icon]="faFilter"></fa-icon></button>
+  </div>
 </div>
 
 <table class="table table-hover" *ngIf="tests">
