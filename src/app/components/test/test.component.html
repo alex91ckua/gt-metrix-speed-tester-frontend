@@ -69,28 +69,35 @@
 
   </ng-container>
 
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      Created At: {{ test.created_at | date : 'medium' }}
-    </li>
-    <li class="list-group-item">
-      Updated At: {{ test.updated_at | date : 'medium' }}
-    </li>    
-    <li class="list-group-item">
-      GTM ID: <var>{{ test.test_id }}</var>
-    </li>
-    <li class="list-group-item">
-      State: 
-      <ng-container [ngSwitch]="test.state">
-        <span *ngSwitchCase="'queued'" class="badge badge-secondary">{{ test.state }}</span>
-        <span *ngSwitchCase="'started'" class="badge badge-warning">{{ test.state }}</span>
-        <span *ngSwitchCase="'completed'" class="badge badge-success">{{ test.state }}</span>
-        <span *ngSwitchCase="'error'" class="badge badge-danger">{{ test.state }}</span>
-        <span *ngSwitchDefault class="badge badge-primary">{{ test.state }}</span>
-      </ng-container>
-    </li>
-    <li class="list-group-item" *ngIf="test.error" >
-      Error: {{ test.error }}
-    </li>
-  </ul>
+  <div class="row mt-5">
+    <div class="col-12">
+      <h4 class="pb-3">Other Details</h4>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          Created At: {{ test.created_at | date : 'medium' }}
+        </li>
+        <li class="list-group-item">
+          Updated At: {{ test.updated_at | date : 'medium' }}
+        </li>    
+        <li class="list-group-item">
+          GTM ID: <a href="{{ test.results.report_url }}" target="_blank" >{{ test.test_id }} <fa-icon [icon]="faExternalLinkAlt"></fa-icon></a>
+        </li>
+        <li class="list-group-item">
+          State: 
+          <ng-container [ngSwitch]="test.state">
+            <span *ngSwitchCase="'queued'" class="badge badge-secondary">{{ test.state }}</span>
+            <span *ngSwitchCase="'started'" class="badge badge-warning">{{ test.state }}</span>
+            <span *ngSwitchCase="'completed'" class="badge badge-success">{{ test.state }}</span>
+            <span *ngSwitchCase="'error'" class="badge badge-danger">{{ test.state }}</span>
+            <span *ngSwitchDefault class="badge badge-primary">{{ test.state }}</span>
+          </ng-container>
+        </li>
+        <li class="list-group-item" *ngIf="test.error" >
+          Error: {{ test.error }}
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
 </div>
