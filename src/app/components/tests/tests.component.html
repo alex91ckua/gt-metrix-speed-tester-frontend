@@ -74,35 +74,38 @@
   </div>
 </div>
 
-<table class="table table-hover" *ngIf="tests">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">GTM ID</th>
-      <th scope="col">URL</th>
-      <th scope="col">State</th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let test of tests; index as i" >
-      <tr *ngIf="!test.hidden" >
-        <th scope="row">{{ i+1 }}</th>
-        <td>
-          <a routerLink="/test/{{ test.id }}">{{ test.test_id }}</a>
-        </td>
-        <td>
-          {{ test.url }}
-        </td>
-        <td>
-          <ng-container [ngSwitch]="test.state">
-            <span *ngSwitchCase="'queued'" class="badge badge-secondary">{{ test.state }} <fa-icon [icon]="faSync"></fa-icon></span>
-            <span *ngSwitchCase="'started'" class="badge badge-warning">{{ test.state }} <fa-icon [icon]="faSync"></fa-icon></span>
-            <span *ngSwitchCase="'completed'" class="badge badge-success">{{ test.state }}</span>
-            <span *ngSwitchCase="'error'" tooltip="{{ test.error }}" class="badge badge-danger">{{ test.state }}</span>
-            <span *ngSwitchDefault class="badge badge-primary">{{ test.state }}</span>
-          </ng-container>
-        </td>
+<div>
+  <table class="table table-hover" *ngIf="tests">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">GTM ID</th>
+        <th scope="col">URL</th>
+        <th scope="col">State</th>
       </tr>
-    </ng-container>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let test of tests; index as i" >
+        <tr *ngIf="!test.hidden" >
+          <th scope="row">{{ i+1 }}</th>
+          <td>
+            <a routerLink="/test/{{ test.id }}">{{ test.test_id }}</a>
+          </td>
+          <td>
+            {{ test.url }}
+          </td>
+          <td>
+            <ng-container [ngSwitch]="test.state">
+              <span *ngSwitchCase="'queued'" class="badge badge-secondary">{{ test.state }} <fa-icon [icon]="faSync"></fa-icon></span>
+              <span *ngSwitchCase="'started'" class="badge badge-warning">{{ test.state }} <fa-icon [icon]="faSync"></fa-icon></span>
+              <span *ngSwitchCase="'completed'" class="badge badge-success">{{ test.state }}</span>
+              <span *ngSwitchCase="'error'" tooltip="{{ test.error }}" class="badge badge-danger">{{ test.state }}</span>
+              <span *ngSwitchDefault class="badge badge-primary">{{ test.state }}</span>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+

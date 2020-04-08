@@ -7,7 +7,7 @@
   <ng-container *ngIf="test.state == 'completed'" >
 
     <div class="row">
-      <div class="col-6" >
+      <div class="col-12 col-md-6 mb-5" >
         <h4 class="pb-3">Performance Scores</h4>
         <div class="row" >
           <div class="col-6 score" >
@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6" >
+      <div class="col-12 col-md-6" >
         <h4 class="pb-3">Page Details</h4>
         <div class="row" >
           <div class="col-12" >
@@ -55,7 +55,7 @@
               </div>
               <div class="score-box__item" >
                 <h6 class="score-box__title" >Total Page Size</h6>
-                <span class="score-box__score">{{ convertBytesToKb(test.results.page_bytes) + 'KB'}}</span>
+                <span class="score-box__score">{{ convertBytesToKb(test.results.page_bytes) + ' KB'}}</span>
               </div>
               <div class="score-box__item" >
                 <h6 class="score-box__title" >Requests</h6>
@@ -67,6 +67,64 @@
       </div>
     </div>
 
+    <div class="row mt-5" >
+
+      <div class="col-12 col-md-2 mb-2">
+        <div class="card bg-light text-center">
+          <div class="card-header">DOM Interactive Load Time</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ test.results.dom_interactive_time + 'ms' }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-2 mb-2">
+        <div class="card bg-light text-center">
+          <div class="card-header">DOM Content Loaded Time</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ test.results.dom_content_loaded_time + 'ms' }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-2 mb-2">
+        <div class="card bg-light text-center">
+          <div class="card-header">HTML Load Time</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ test.results.html_load_time + 'ms' }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-2 mb-2">
+        <div class="card bg-light text-center">
+          <div class="card-header">Page Load Time</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ test.results.first_paint_time + 'ms' }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-2 mb-2">
+        <div class="card bg-light text-center">
+          <div class="card-header">Page Load Time</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ convertMiliseconds(test.results.page_load_time, 's') + 's' }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-2 mb-2">
+        <div class="card bg-light text-center">
+          <div class="card-header">Page Load Time</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ test.results.first_paint_time + 'ms' }}</h5>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
   </ng-container>
 
   <div class="row mt-5">
@@ -96,8 +154,8 @@
           Error: {{ test.error }}
         </li>
       </ul>
-
     </div>
+
   </div>
 
 </div>

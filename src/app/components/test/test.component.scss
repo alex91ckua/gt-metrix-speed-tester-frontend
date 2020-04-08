@@ -36,11 +36,28 @@ round-progress {
 
   &__score {
     letter-spacing: -0.0625em;
-    font-size: 60px;
+    font-size: 20px;
+    
+    @media (min-width: 768px) {
+      font-size: 60px;
+    }
     font-weight: 200;
   }
 
   &__title {
     margin-bottom: 5px;
   }
+}
+
+.card-title {
+  font-size: 30px;
+  letter-spacing: -0.0625em;
+  font-weight: 200;
+}
+
+.card {
+  @media (min-width: 768px) {
+    max-width: 18rem;
+  }
+  height: 100%;
 }
