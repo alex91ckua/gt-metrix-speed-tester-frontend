@@ -1,11 +1,11 @@
 <nav id="primary-navbar" class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" routerLink="/">{{ appName }}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor03">
+    <div class="collapse navbar-collapse" id="navbarColor03" [collapse]="isCollapsed">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <a class="nav-link" routerLink="/">Tests</a>
