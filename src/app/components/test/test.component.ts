@@ -33,6 +33,36 @@ export class TestComponent implements OnInit {
     })
   }
 
+  private convertBytesToKb(bytes: number){
+    return (bytes / 1024).toFixed(0);
+  }
+
+  private convertMiliseconds(miliseconds: number, format: string) {
+    var days, hours, minutes, seconds, total_hours, total_minutes, total_seconds;
+    
+    total_seconds = miliseconds / 1000;
+    total_minutes = Math.floor(total_seconds / 60);
+    total_hours = Math.floor(total_minutes / 60);
+    days = Math.floor(total_hours / 24);
+  
+    seconds = total_seconds % 60;
+    minutes = total_minutes % 60;
+    hours = total_hours % 24;
+    
+    switch(format) {
+    case 's':
+      return total_seconds.toFixed(1);
+    case 'm':
+      return total_minutes;
+    case 'h':
+      return total_hours;
+    case 'd':
+      return days;
+    default:
+      return { d: days, h: hours, m: minutes, s: seconds };
+    }
+  };
+
   private getStatusColor(points: number) {
     let color = 'red';
     if (points > 50) {

@@ -5,44 +5,68 @@
 <div *ngIf="loaded">
 
   <ng-container *ngIf="test.results" >
-    <div class="row" >
-      <div class="col-3 offset-md-3 score" >
-        <h4 class="score__title" >PageSpeed score</h4>
-        <div class="progress-wrapper">
-          <div class="current" [ngStyle]="getOverlayStyle()">{{ test.results.pagespeed_score }}/{{ maxScorePoint }}</div>
-          <round-progress
-            [current]="test.results.pagespeed_score"
-            [max]="maxScorePoint"
-            [color]="pageSpeedColor"
-            [background]="'#eaeaea'"
-            [radius]="radius"
-            [stroke]="10"
-            [rounded]="true"
-            [semicircle]="semicircle">
-          </round-progress>
-        </div>
-      </div>
 
-      <div class="col-3 score" >
-        <h4 class="score__title" >YSlow score</h4>
-        <div>
-          <div class="progress-wrapper">
-            <div class="current" [ngStyle]="getOverlayStyle()">{{ test.results.yslow_score }}/{{ maxScorePoint }}</div>
-            <round-progress
-              [current]="test.results.yslow_score"
-              [max]="maxScorePoint"
-              [color]="yslowSpeedColor"
-              [background]="'#eaeaea'"
-              [radius]="radius"
-              [stroke]="10"
-              [rounded]="true"
-              [semicircle]="semicircle">
-            </round-progress>
+    <div class="row">
+      <div class="col-6" >
+        <h4 class="pb-3">Performance Scores</h4>
+        <div class="row" >
+          <div class="col-6 score" >
+            <h6>PageSpeed Score</h6>
+            <div class="progress-wrapper">
+              <div class="current" [ngStyle]="getOverlayStyle()">{{ test.results.pagespeed_score }}/{{ maxScorePoint }}</div>
+              <round-progress
+                [current]="test.results.pagespeed_score"
+                [max]="maxScorePoint"
+                [color]="pageSpeedColor"
+                [background]="'#eaeaea'"
+                [radius]="radius"
+                [stroke]="10"
+                [rounded]="true"
+                [semicircle]="semicircle">
+              </round-progress>
+            </div>          
+          </div>
+          <div class="col-6 score" >
+            <h6>YSlow Score</h6>
+            <div class="progress-wrapper">
+              <div class="current" [ngStyle]="getOverlayStyle()">{{ test.results.yslow_score }}/{{ maxScorePoint }}</div>
+              <round-progress
+                [current]="test.results.yslow_score"
+                [max]="maxScorePoint"
+                [color]="yslowSpeedColor"
+                [background]="'#eaeaea'"
+                [radius]="radius"
+                [stroke]="10"
+                [rounded]="true"
+                [semicircle]="semicircle">
+              </round-progress>
+            </div>          
           </div>
         </div>
-
+      </div>
+      <div class="col-6" >
+        <h4 class="pb-3">Page Details</h4>
+        <div class="row" >
+          <div class="col-12" >
+            <div class="score-box" >
+              <div class="score-box__item" >
+                <h6 class="score-box__title" >Fully Loaded Time</h6>
+                <span class="score-box__score">{{ convertMiliseconds(test.results.fully_loaded_time, 's') + 's' }}</span>
+              </div>
+              <div class="score-box__item" >
+                <h6 class="score-box__title" >Total Page Size</h6>
+                <span class="score-box__score">{{ convertBytesToKb(test.results.page_bytes) + 'KB'}}</span>
+              </div>
+              <div class="score-box__item" >
+                <h6 class="score-box__title" >Requests</h6>
+                <span class="score-box__score">{{ test.results.page_elements }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
   </ng-container>
 
   <ul class="list-group list-group-flush">
