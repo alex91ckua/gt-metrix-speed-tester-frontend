@@ -6,6 +6,8 @@ export class Test {
   test_id: string;
   created_at: string;
   updated_at: string;
+  hidden?: boolean;
+  url: string;
 }
 
 export class TestResults {
