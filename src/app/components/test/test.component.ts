@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Test } from 'src/app/core/models/test.type';
 import { GtMetrixService } from 'src/app/core/services/gt-metrix.service';
 import { ActivatedRoute } from '@angular/router';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-test',
@@ -17,6 +18,7 @@ export class TestComponent implements OnInit {
   readonly radius = 60;
   pageSpeedColor = 'white';
   yslowSpeedColor = 'white';
+  readonly faExternalLinkAlt = faExternalLinkAlt;
 
   constructor(private gtMetrixService: GtMetrixService, private route: ActivatedRoute) { }
 

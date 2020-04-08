@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TestRoutingModule } from './test-routing.module';
 import { TestComponent } from './test.component';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
   imports: [
     CommonModule,
     TestRoutingModule,
-    RoundProgressModule
+    RoundProgressModule,
+    FontAwesomeModule
   ]
 })
 export class TestModule { }
