@@ -4,7 +4,7 @@
 
 <div *ngIf="loaded">
 
-  <ng-container *ngIf="test.results" >
+  <ng-container *ngIf="test.state == 'completed'" >
 
     <div class="row">
       <div class="col-6" >
@@ -79,7 +79,7 @@
         <li class="list-group-item">
           Updated At: {{ test.updated_at | date : 'medium' }}
         </li>    
-        <li class="list-group-item">
+        <li class="list-group-item" *ngIf="test.results.report_url">
           GTM ID: <a href="{{ test.results.report_url }}" target="_blank" >{{ test.test_id }} <fa-icon [icon]="faExternalLinkAlt"></fa-icon></a>
         </li>
         <li class="list-group-item">
