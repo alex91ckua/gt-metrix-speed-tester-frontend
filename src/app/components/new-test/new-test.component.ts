@@ -22,6 +22,7 @@ export class NewTestComponent implements OnInit {
 
   onStartClicked(event) {
     this.startDisabled = true;
+    // do request for each url
     this.data.forEach(item => {
       this.gtMetrixService.createTest(item.url).subscribe(
         (data) => {
@@ -32,6 +33,7 @@ export class NewTestComponent implements OnInit {
         error => {
           console.log(error);
           item.state = 'error';
+          // error message in error.error property
           item.errorMsg = error.error.error;
         },
       )
