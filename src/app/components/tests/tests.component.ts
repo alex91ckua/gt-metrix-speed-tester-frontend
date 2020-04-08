@@ -20,10 +20,10 @@ export class TestsComponent implements OnInit {
 
   filtersModel = {
     url: '',
-    pagescoreFrom: 0,
-    pagescoreTo: 100,
-    yslowFrom: 0,
-    yslowTo: 100,
+    pagescoreFrom: null,
+    pagescoreTo: null,
+    yslowFrom: null,
+    yslowTo: null,
   }
 
   constructor(private gtMetrixService: GtMetrixService) { }
@@ -48,7 +48,7 @@ export class TestsComponent implements OnInit {
     this.tests.forEach((test, i) => {
       this.tests[i].hidden = false;
       if (this.filtersModel.url.length !== 0) {
-        if (!test.url.includes(this.filtersModel.url)) {
+        if (test.url.indexOf(this.filtersModel.url) === -1) {
           this.tests[i].hidden = true;
         }
       }
@@ -84,6 +84,14 @@ export class TestsComponent implements OnInit {
     this.tests.forEach((test, i) => {
       this.tests[i].hidden = false;
     })
+
+    this.filtersModel = {
+      url: '',
+      pagescoreFrom: null,
+      pagescoreTo: null,
+      yslowFrom: null,
+      yslowTo: null,
+    }    
   }
 
   ngOnInit() {
